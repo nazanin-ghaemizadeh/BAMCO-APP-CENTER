@@ -1,128 +1,36 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#6d28d9">
-  <title>BAMCO APP CENTER</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <style>
-    :root{
-      --purple:#6d28d9;
-      --purple-2:#8b5cf6;
-      --purple-soft:#f7f2ff;
-      --purple-line:#e7dcfb;
-      --text:#271b3f;
-      --muted:#7c6e99;
-      --shadow:0 18px 48px rgba(109,40,217,.10);
-    }
-    *{box-sizing:border-box}
-    html,body{min-height:100%}
-    body{
-      margin:0;
-      font-family:Tahoma,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 92% 6%, rgba(139,92,246,.12), transparent 24%),
-        radial-gradient(circle at 8% 94%, rgba(109,40,217,.08), transparent 24%),
-        #fff;
-    }
-    .page{min-height:100vh;display:flex;flex-direction:column;max-width:1180px;margin:auto;padding:28px 18px 24px}
-    .logo-wrap{display:flex;justify-content:center;align-items:center;padding:10px 0 34px}
-    .logo{width:190px;max-width:56vw;height:auto;object-fit:contain}
-    .apps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
-    .card{
-      background:#fff;
-      border:1px solid var(--purple-line);
-      border-radius:30px;
-      box-shadow:var(--shadow);
-      min-height:280px;
-      padding:26px;
-      display:flex;
-      flex-direction:column;
-      transition:.2s ease;
-    }
-    .card:hover{transform:translateY(-3px);box-shadow:0 22px 54px rgba(109,40,217,.14)}
-    .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-    .app-icon{
-      width:88px;height:88px;border-radius:26px;
-      display:grid;place-items:center;
-      background:linear-gradient(145deg,#faf7ff,#f0e8ff);
-      border:1px solid var(--purple-line)
-    }
-    .app-icon img{width:52px;height:52px}
-    .status{font-size:12px;font-weight:700;padding:8px 13px;border-radius:999px;border:1px solid var(--purple-line);white-space:nowrap}
-    .active{background:#f2eaff;color:var(--purple)}
-    .soon{background:#faf8ff;color:#8e7aac}
-    h2{font-size:22px;line-height:1.75;margin:22px 0 0;font-weight:700}
-    .enter-row{margin-top:auto;padding-top:26px;display:flex;justify-content:flex-end}
-    .enter{
-      width:58px;height:58px;border-radius:18px;
-      display:grid;place-items:center;
-      text-decoration:none;
-      background:linear-gradient(135deg,var(--purple),var(--purple-2));
-      box-shadow:0 12px 28px rgba(109,40,217,.20);
-      transition:.18s ease;
-    }
-    .enter:hover{transform:scale(1.04)}
-    .enter svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-    .enter.disabled{background:#f4f0fa;box-shadow:none;border:1px solid var(--purple-line);cursor:default}
-    .enter.disabled svg{stroke:#b8a6d6}
-    footer{margin-top:auto;padding:34px 10px 4px;text-align:center;color:var(--muted);font-size:12.5px;line-height:2}
-    footer b{color:var(--text)}
-    @media(max-width:900px){.apps{grid-template-columns:1fr}.card{min-height:220px}.logo{width:160px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>BAMCO APP CENTER</title>
+<style>
+:root{--p:#6f2dbd;--p2:#8b5cf6;--soft:#f8f4ff;--line:#e8def8;--text:#2f2442;--muted:#8c7ba8}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--text);font-family:Tahoma,Arial,sans-serif}.wrap{min-height:100vh;max-width:940px;margin:auto;padding:36px 20px 24px;display:flex;flex-direction:column}.logo{display:block;width:185px;max-width:55vw;height:auto;margin:0 auto 42px}.list{display:grid;gap:14px}.app{min-height:112px;border:1px solid var(--line);border-radius:24px;background:#fff;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:16px 18px;box-shadow:0 10px 28px rgba(111,45,189,.06)}.app-icon{width:68px;height:68px;border-radius:20px;background:var(--soft);border:1px solid var(--line);display:grid;place-items:center}.app-icon img{width:40px;height:40px}.copy{min-width:0}.name{margin:0;font-size:20px;line-height:1.7;font-weight:700}.state{display:inline-block;margin-top:4px;font-size:12px;font-weight:700;color:var(--p);background:var(--soft);border:1px solid var(--line);padding:5px 10px;border-radius:999px}.state.soon{color:#9a89b8}.go{width:50px;height:50px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;text-decoration:none;box-shadow:0 10px 22px rgba(111,45,189,.16)}.go svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.go.disabled{background:#f4f1f8;box-shadow:none;border:1px solid var(--line)}.go.disabled svg{stroke:#b7a8cf}footer{margin-top:auto;padding-top:40px;text-align:center;color:var(--muted);font-size:12.5px;line-height:2}footer b{color:var(--text)}@media(max-width:650px){.wrap{padding-top:24px}.logo{width:150px;margin-bottom:28px}.app{grid-template-columns:auto 1fr auto;gap:12px;padding:14px}.app-icon{width:58px;height:58px}.app-icon img{width:34px;height:34px}.name{font-size:16px}.go{width:46px;height:46px}}
+</style>
 </head>
 <body>
-  <main class="page">
-    <div class="logo-wrap">
-      <img class="logo" src="bamco-logo.png" alt="لوگوی شرکت خودروسازان بم">
-    </div>
-
-    <section class="apps" aria-label="سامانه‌های سازمانی">
-      <article class="card">
-        <div class="card-top">
-          <div class="app-icon"><img src="icons/task-management.svg" alt="آیکون سامانه مدیریت امور"></div>
-          <span class="status active">فعال</span>
-        </div>
-        <h2>سامانه مدیریت، پایش و پیگیری امور</h2>
-        <div class="enter-row">
-          <a class="enter" href="https://nazanin-ghaemizadeh.github.io/BAMCO-TASK-MANAGEMENT/" aria-label="ورود به سامانه مدیریت، پایش و پیگیری امور">
-            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <div class="app-icon"><img src="icons/vehicle-assessment.svg" alt="آیکون سامانه ارزیابی عملکرد خودرو"></div>
-          <span class="status active">فعال</span>
-        </div>
-        <h2>سامانه ارزیابی عملکرد خودرو</h2>
-        <div class="enter-row">
-          <a class="enter" href="https://nazanin-ghaemizadeh.github.io/BAMCO-VEHICLE-ASSESSMENT/" aria-label="ورود به سامانه ارزیابی عملکرد خودرو">
-            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-top">
-          <div class="app-icon"><img src="icons/homologation.svg" alt="آیکون سامانه همولوگیشن"></div>
-          <span class="status soon">به زودی</span>
-        </div>
-        <h2>سامانه همولوگیشن</h2>
-        <div class="enter-row">
-          <span class="enter disabled" aria-label="سامانه همولوگیشن به زودی فعال می‌شود">
-            <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-          </span>
-        </div>
-      </article>
-    </section>
-
-    <footer>
-      توسعه یافته توسط واحد توسعه و تکوین محصول شرکت خودروسازان بم | <b>شهاب‌الدین تنهائیان</b> و <b>نازنین قائمی</b>
-    </footer>
-  </main>
+<main class="wrap">
+<img class="logo" src="bamco-logo.png" alt="لوگوی شرکت خودروسازان بم">
+<section class="list" aria-label="سامانه‌های سازمانی">
+  <article class="app">
+    <div class="app-icon"><img src="icons/task-management.svg" alt=""></div>
+    <div class="copy"><h1 class="name">سامانه مدیریت، پایش و پیگیری امور</h1><span class="state">فعال</span></div>
+    <a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-TASK-MANAGEMENT/" aria-label="ورود به سامانه مدیریت، پایش و پیگیری امور"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+  </article>
+  <article class="app">
+    <div class="app-icon"><img src="icons/vehicle-assessment.svg" alt=""></div>
+    <div class="copy"><h1 class="name">سامانه ارزیابی عملکرد خودرو</h1><span class="state">فعال</span></div>
+    <a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-VEHICLE-ASSESSMENT/" aria-label="ورود به سامانه ارزیابی عملکرد خودرو"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+  </article>
+  <article class="app">
+    <div class="app-icon"><img src="icons/homologation.svg" alt=""></div>
+    <div class="copy"><h1 class="name">سامانه همولوگیشن</h1><span class="state soon">به زودی</span></div>
+    <span class="go disabled" aria-label="به زودی"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+  </article>
+</section>
+<footer>توسعه یافته توسط واحد توسعه و تکوین محصول شرکت خودروسازان بم | <b>شهاب‌الدین تنهائیان</b> و <b>نازنین قائمی</b></footer>
+</main>
 </body>
 </html>
