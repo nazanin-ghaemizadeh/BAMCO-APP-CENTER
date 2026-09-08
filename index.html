@@ -4,33 +4,298 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#ffffff">
-<title>BAMCO APP CENTER</title>
+<title>سامانه یکپارچه خودروسازان بم</title>
 <style>
-:root{--p:#6f2dbd;--p2:#8b5cf6;--soft:#f8f4ff;--line:#e8def8;--text:#2f2442;--muted:#8c7ba8}
-*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--text);font-family:Tahoma,Arial,sans-serif}.wrap{min-height:100vh;max-width:940px;margin:auto;padding:36px 20px 24px;display:flex;flex-direction:column}.logo{display:block;width:185px;max-width:55vw;height:auto;margin:0 auto 42px}.list{display:grid;gap:14px}.app{min-height:112px;border:1px solid var(--line);border-radius:24px;background:#fff;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:16px 18px;box-shadow:0 10px 28px rgba(111,45,189,.06)}.app-icon{width:68px;height:68px;border-radius:20px;background:var(--soft);border:1px solid var(--line);display:grid;place-items:center}.app-icon img{width:40px;height:40px}.copy{min-width:0}.name{margin:0;font-size:20px;line-height:1.7;font-weight:700}.state{display:inline-block;margin-top:4px;font-size:12px;font-weight:700;color:var(--p);background:var(--soft);border:1px solid var(--line);padding:5px 10px;border-radius:999px}.state.soon{color:#9a89b8}.go{width:50px;height:50px;border-radius:16px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;text-decoration:none;box-shadow:0 10px 22px rgba(111,45,189,.16)}.go svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.go.disabled{background:#f4f1f8;box-shadow:none;border:1px solid var(--line)}.go.disabled svg{stroke:#b7a8cf}footer{margin-top:auto;padding-top:40px;text-align:center;color:var(--muted);font-size:12.5px;line-height:2}footer b{color:var(--text)}@media(max-width:650px){.wrap{padding-top:24px}.logo{width:150px;margin-bottom:28px}.app{grid-template-columns:auto 1fr auto;gap:12px;padding:14px}.app-icon{width:58px;height:58px}.app-icon img{width:34px;height:34px}.name{font-size:16px}.go{width:46px;height:46px}}
+:root{
+  --p:#6f2dbd;
+  --p2:#8b5cf6;
+  --p3:#a78bfa;
+  --soft:#f8f4ff;
+  --soft2:#fcfaff;
+  --line:#e9def9;
+  --text:#30223f;
+  --muted:#87789f;
+  --shadow:0 18px 48px rgba(111,45,189,.10);
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{
+  margin:0;
+  color:var(--text);
+  font-family:"B Nazanin","BNazanin","B Nazanin Bold",Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 8% 12%,rgba(139,92,246,.16),transparent 24%),
+    radial-gradient(circle at 92% 18%,rgba(111,45,189,.10),transparent 22%),
+    radial-gradient(circle at 50% 100%,rgba(167,139,250,.12),transparent 30%),
+    linear-gradient(180deg,#fff 0%,#fdfbff 54%,#faf7ff 100%);
+  overflow-x:hidden;
+}
+body:before,
+body:after{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  border-radius:50%;
+  filter:blur(1px);
+  pointer-events:none;
+}
+body:before{
+  width:360px;height:360px;
+  right:-140px;top:120px;
+  border:1px solid rgba(111,45,189,.11);
+  box-shadow:0 0 0 44px rgba(111,45,189,.025),0 0 0 88px rgba(111,45,189,.018);
+}
+body:after{
+  width:300px;height:300px;
+  left:-120px;bottom:50px;
+  border:1px solid rgba(139,92,246,.10);
+  box-shadow:0 0 0 38px rgba(139,92,246,.022),0 0 0 76px rgba(139,92,246,.014);
+}
+.wrap{
+  min-height:100vh;
+  width:min(1040px,calc(100% - 32px));
+  margin:auto;
+  padding:32px 0 22px;
+  display:flex;
+  flex-direction:column;
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:24px 24px 26px;
+  margin-bottom:22px;
+  text-align:center;
+  border:1px solid rgba(111,45,189,.10);
+  border-radius:30px;
+  background:rgba(255,255,255,.80);
+  box-shadow:0 14px 38px rgba(111,45,189,.07);
+  backdrop-filter:blur(14px);
+}
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:auto -12% -90px auto;
+  width:270px;height:180px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(139,92,246,.15),rgba(139,92,246,0) 70%);
+}
+.logo{
+  display:block;
+  width:155px;
+  max-width:48vw;
+  height:auto;
+  margin:0 auto 10px;
+  position:relative;
+  z-index:1;
+}
+.title{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:var(--p);
+  font-size:30px;
+  font-weight:700;
+  line-height:1.75;
+}
+.subtitle{
+  position:relative;
+  z-index:1;
+  margin:0;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.7;
+}
+.list{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+.app{
+  position:relative;
+  overflow:hidden;
+  min-height:245px;
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:rgba(255,255,255,.92);
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.app:before{
+  content:"";
+  position:absolute;
+  right:0;top:0;
+  width:100%;height:5px;
+  background:linear-gradient(90deg,var(--p3),var(--p));
+  opacity:.9;
+}
+.app:hover{
+  transform:translateY(-4px);
+  border-color:#dcccfa;
+  box-shadow:0 22px 56px rgba(111,45,189,.14);
+}
+.app-top{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:20px;
+}
+.app-icon{
+  width:72px;height:72px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#fbf9ff,#f0e8ff);
+  border:1px solid var(--line);
+  display:grid;
+  place-items:center;
+  box-shadow:inset 0 1px 0 #fff;
+}
+.app-icon img{width:43px;height:43px}
+.state{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 11px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:var(--soft);
+  color:var(--p);
+  font-size:14px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.state:before{
+  content:"";
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--p2);
+  box-shadow:0 0 0 4px rgba(139,92,246,.10);
+}
+.state.soon{color:#9987b4;background:#faf8fd}
+.state.soon:before{background:#b7a7cd;box-shadow:none}
+.name{
+  margin:0;
+  font-size:22px;
+  font-weight:700;
+  line-height:1.85;
+  text-align:right;
+}
+.enter-row{
+  width:100%;
+  margin-top:auto;
+  padding-top:22px;
+  display:flex;
+  justify-content:flex-end;
+}
+.go{
+  width:54px;height:54px;
+  border-radius:18px;
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  box-shadow:0 12px 26px rgba(111,45,189,.20);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.go:hover{transform:scale(1.06);box-shadow:0 14px 30px rgba(111,45,189,.26)}
+.go svg{
+  width:25px;height:25px;
+  fill:none;
+  stroke:#fff;
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.go.disabled{
+  background:#f3eff8;
+  box-shadow:none;
+  border:1px solid var(--line);
+  cursor:default;
+}
+.go.disabled svg{stroke:#b7a8ce}
+footer{
+  margin-top:auto;
+  padding:28px 12px 2px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:400;
+  line-height:2;
+}
+@media(max-width:900px){
+  .list{grid-template-columns:1fr}
+  .app{min-height:185px}
+}
+@media(max-width:650px){
+  .wrap{width:min(100% - 22px,1040px);padding-top:18px}
+  .hero{padding:20px 14px 22px;border-radius:24px}
+  .logo{width:132px}
+  .title{font-size:24px}
+  .subtitle{font-size:15px}
+  .app{padding:18px;border-radius:24px}
+  .app-icon{width:62px;height:62px;border-radius:19px}
+  .app-icon img{width:37px;height:37px}
+  .name{font-size:19px}
+  .state{font-size:13px}
+  .go{width:49px;height:49px}
+  footer{font-size:12.5px;padding-top:24px}
+}
 </style>
 </head>
 <body>
 <main class="wrap">
-<img class="logo" src="bamco-logo.png" alt="لوگوی شرکت خودروسازان بم">
-<section class="list" aria-label="سامانه‌های سازمانی">
-  <article class="app">
-    <div class="app-icon"><img src="icons/task-management.svg" alt=""></div>
-    <div class="copy"><h1 class="name">سامانه مدیریت، پایش و پیگیری امور</h1><span class="state">فعال</span></div>
-    <a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-TASK-MANAGEMENT/" aria-label="ورود به سامانه مدیریت، پایش و پیگیری امور"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
-  </article>
-  <article class="app">
-    <div class="app-icon"><img src="icons/vehicle-assessment.svg" alt=""></div>
-    <div class="copy"><h1 class="name">سامانه ارزیابی عملکرد خودرو</h1><span class="state">فعال</span></div>
-    <a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-VEHICLE-ASSESSMENT/" aria-label="ورود به سامانه ارزیابی عملکرد خودرو"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
-  </article>
-  <article class="app">
-    <div class="app-icon"><img src="icons/homologation.svg" alt=""></div>
-    <div class="copy"><h1 class="name">سامانه همولوگیشن</h1><span class="state soon">به زودی</span></div>
-    <span class="go disabled" aria-label="به زودی"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
-  </article>
-</section>
-<footer>توسعه یافته توسط واحد توسعه و تکوین محصول شرکت خودروسازان بم | <b>شهاب‌الدین تنهائیان</b> و <b>نازنین قائمی</b></footer>
+  <header class="hero">
+    <img class="logo" src="bamco-logo.png" alt="لوگوی شرکت خودروسازان بم">
+    <h1 class="title">سامانه یکپارچه دسترسی به سامانه‌های سازمانی</h1>
+    <p class="subtitle">شرکت خودروسازان بم</p>
+  </header>
+
+  <section class="list" aria-label="سامانه‌های سازمانی">
+    <article class="app">
+      <div class="app-top">
+        <div class="app-icon"><img src="icons/task-management.svg" alt="آیکون سامانه مدیریت امور"></div>
+        <span class="state">فعال</span>
+      </div>
+      <h2 class="name">سامانه مدیریت، پایش و پیگیری امور</h2>
+      <div class="enter-row">
+        <a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-TASK-MANAGEMENT/" aria-label="ورود به سامانه مدیریت، پایش و پیگیری امور">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <article class="app">
+      <div class="app-top">
+        <div class="app-icon"><img src="icons/vehicle-assessment.svg" alt="آیکون سامانه ارزیابی عملکرد خودرو"></div>
+        <span class="state">فعال</span>
+      </div>
+      <h2 class="name">سامانه ارزیابی عملکرد خودرو</h2>
+      <div class="enter-row">
+        <a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-VEHICLE-ASSESSMENT/" aria-label="ورود به سامانه ارزیابی عملکرد خودرو">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <article class="app">
+      <div class="app-top">
+        <div class="app-icon"><img src="icons/homologation.svg" alt="آیکون سامانه همولوگیشن"></div>
+        <span class="state soon">به زودی</span>
+      </div>
+      <h2 class="name">سامانه همولوگیشن</h2>
+      <div class="enter-row">
+        <span class="go disabled" aria-label="سامانه همولوگیشن به زودی فعال می‌شود">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </span>
+      </div>
+    </article>
+  </section>
+
+  <footer>توسعه یافته توسط واحد توسعه و تکوین محصول شرکت خودروسازان بم | شهاب‌الدین تنهائیان و نازنین قائمی</footer>
 </main>
 </body>
 </html>
