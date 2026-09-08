@@ -96,7 +96,7 @@ body:after{
   z-index:1;
   margin:0;
   color:var(--p);
-  font-size:30px;
+  font-size:29px;
   font-weight:700;
   line-height:1.65;
 }
@@ -120,14 +120,15 @@ body:after{
   overflow:hidden;
   min-height:0;
   height:100%;
-  padding:22px;
+  padding:22px 22px 20px;
   border:1px solid var(--line);
   border-radius:28px;
-  background:rgba(255,255,255,.92);
+  background:rgba(255,255,255,.94);
   box-shadow:var(--shadow);
   display:flex;
   flex-direction:column;
-  align-items:flex-start;
+  align-items:center;
+  text-align:center;
   transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
 }
 .app:before{
@@ -138,6 +139,15 @@ body:after{
   background:linear-gradient(90deg,var(--p3),var(--p));
   opacity:.9;
 }
+.app:after{
+  content:"";
+  position:absolute;
+  width:220px;height:220px;
+  border-radius:50%;
+  left:-95px;bottom:-120px;
+  background:radial-gradient(circle,rgba(139,92,246,.09),rgba(139,92,246,0) 70%);
+  pointer-events:none;
+}
 .app:hover{
   transform:translateY(-4px);
   border-color:#dcccfa;
@@ -147,20 +157,10 @@ body:after{
   width:100%;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:20px;
+  justify-content:flex-start;
+  min-height:32px;
+  margin-bottom:8px;
 }
-.app-icon{
-  width:72px;height:72px;
-  border-radius:22px;
-  background:linear-gradient(145deg,#fbf9ff,#f0e8ff);
-  border:1px solid var(--line);
-  display:grid;
-  place-items:center;
-  box-shadow:inset 0 1px 0 #fff;
-}
-.app-icon img{width:43px;height:43px}
 .state{
   display:inline-flex;
   align-items:center;
@@ -183,19 +183,66 @@ body:after{
 }
 .state.soon{color:#9987b4;background:#faf8fd}
 .state.soon:before{background:#b7a7cd;box-shadow:none}
+.app-icon{
+  position:relative;
+  flex:0 0 auto;
+  width:158px;
+  height:158px;
+  margin:2px auto 14px;
+  border-radius:38px;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(circle at 30% 25%,rgba(255,255,255,.98) 0 16%,transparent 17%),
+    linear-gradient(145deg,#ffffff 0%,#f8f3ff 48%,#eee4ff 100%);
+  border:1px solid #dfd0f7;
+  box-shadow:
+    0 18px 36px rgba(111,45,189,.14),
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -18px 34px rgba(139,92,246,.045);
+  isolation:isolate;
+}
+.app-icon:before,
+.app-icon:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  z-index:-1;
+}
+.app-icon:before{
+  width:116px;height:116px;
+  background:rgba(139,92,246,.08);
+  box-shadow:0 0 0 15px rgba(139,92,246,.035);
+}
+.app-icon:after{
+  width:22px;height:22px;
+  left:18px;top:18px;
+  background:linear-gradient(135deg,var(--p3),var(--p2));
+  opacity:.22;
+}
+.app-icon img{
+  width:112px;
+  height:112px;
+  display:block;
+  filter:drop-shadow(0 10px 16px rgba(111,45,189,.13));
+  transform:scale(1.02);
+}
 .name{
-  margin:0;
+  margin:0 auto;
+  max-width:95%;
   font-size:22px;
   font-weight:700;
-  line-height:1.85;
-  text-align:right;
+  line-height:1.75;
+  text-align:center;
 }
 .enter-row{
   width:100%;
   margin-top:auto;
-  padding-top:22px;
+  padding-top:16px;
   display:flex;
-  justify-content:flex-end;
+  justify-content:center;
+  position:relative;
+  z-index:2;
 }
 .go{
   width:54px;height:54px;
@@ -235,33 +282,35 @@ footer{
   .wrap{padding:12px 0 8px;gap:12px;}
   .hero{padding:14px 20px 16px;border-radius:26px;}
   .logo{width:125px;margin-bottom:5px;}
-  .title{font-size:26px;line-height:1.5;}
+  .title{font-size:25px;line-height:1.5;}
   .subtitle{font-size:15px;line-height:1.5;}
-  .app{padding:18px 20px;border-radius:25px;}
-  .app-top{margin-bottom:14px;}
-  .app-icon{width:62px;height:62px;border-radius:19px;}
-  .app-icon img{width:38px;height:38px;}
-  .name{font-size:20px;line-height:1.65;}
-  .enter-row{padding-top:12px;}
-  .go{width:48px;height:48px;border-radius:16px;}
+  .app{padding:17px 18px 16px;border-radius:25px;}
+  .app-top{margin-bottom:3px;}
+  .app-icon{width:122px;height:122px;border-radius:30px;margin-bottom:8px;}
+  .app-icon:before{width:88px;height:88px;box-shadow:0 0 0 11px rgba(139,92,246,.035);}
+  .app-icon img{width:86px;height:86px;}
+  .name{font-size:19px;line-height:1.55;}
+  .enter-row{padding-top:8px;}
+  .go{width:46px;height:46px;border-radius:15px;}
   footer{font-size:12.5px;line-height:1.6;}
 }
 @media(max-width:900px){
   body{overflow-y:auto;}
   .wrap{height:auto;min-height:100vh;min-height:100dvh;width:min(100% - 24px,1040px);display:flex;flex-direction:column;}
   .list{grid-template-columns:1fr}
-  .app{min-height:185px;height:auto}
+  .app{min-height:280px;height:auto}
 }
 @media(max-width:650px){
   .wrap{padding-top:18px}
   .hero{padding:20px 14px 22px;border-radius:24px}
   .logo{width:132px}
-  .title{font-size:24px}
+  .title{font-size:22px;line-height:1.7}
   .subtitle{font-size:15px}
-  .app{padding:18px;border-radius:24px}
-  .app-icon{width:62px;height:62px;border-radius:19px}
-  .app-icon img{width:37px;height:37px}
-  .name{font-size:19px}
+  .app{padding:18px;border-radius:24px;min-height:268px}
+  .app-icon{width:116px;height:116px;border-radius:29px;margin-bottom:10px}
+  .app-icon:before{width:84px;height:84px;box-shadow:0 0 0 10px rgba(139,92,246,.035)}
+  .app-icon img{width:82px;height:82px}
+  .name{font-size:19px;line-height:1.6}
   .state{font-size:13px}
   .go{width:49px;height:49px}
   footer{font-size:12.5px;padding-top:8px}
@@ -272,16 +321,16 @@ footer{
 <main class="wrap">
   <header class="hero">
     <img class="logo" src="bamco-logo.png" alt="لوگوی شرکت خودروسازان بم">
-    <h1 class="title">سامانه یکپارچه دسترسی به سامانه‌های سازمانی</h1>
+    <h1 class="title">سامانه یکپارچه دسترسی واحد مهندسی توسعه و تکوین محصول</h1>
     <p class="subtitle">شرکت خودروسازان بم</p>
   </header>
 
   <section class="list" aria-label="سامانه‌های سازمانی">
     <article class="app">
       <div class="app-top">
-        <div class="app-icon"><img src="icons/task-management.svg" alt="آیکون سامانه مدیریت امور"></div>
         <span class="state">فعال</span>
       </div>
+      <div class="app-icon"><img src="icons/task-management.svg" alt="آیکون سامانه مدیریت امور"></div>
       <h2 class="name">سامانه مدیریت، پایش و پیگیری امور</h2>
       <div class="enter-row">
         <a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-TASK-MANAGEMENT/" aria-label="ورود به سامانه مدیریت، پایش و پیگیری امور">
@@ -292,9 +341,9 @@ footer{
 
     <article class="app">
       <div class="app-top">
-        <div class="app-icon"><img src="icons/vehicle-assessment.svg" alt="آیکون سامانه ارزیابی عملکرد خودرو"></div>
         <span class="state">فعال</span>
       </div>
+      <div class="app-icon"><img src="icons/vehicle-assessment.svg" alt="آیکون سامانه ارزیابی عملکرد خودرو"></div>
       <h2 class="name">سامانه ارزیابی عملکرد خودرو</h2>
       <div class="enter-row">
         <a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-VEHICLE-ASSESSMENT/" aria-label="ورود به سامانه ارزیابی عملکرد خودرو">
@@ -305,9 +354,9 @@ footer{
 
     <article class="app">
       <div class="app-top">
-        <div class="app-icon"><img src="icons/homologation.svg" alt="آیکون سامانه همولوگیشن"></div>
         <span class="state soon">به زودی</span>
       </div>
+      <div class="app-icon"><img src="icons/homologation.svg" alt="آیکون سامانه همولوگیشن"></div>
       <h2 class="name">سامانه همولوگیشن</h2>
       <div class="enter-row">
         <span class="go disabled" aria-label="سامانه همولوگیشن به زودی فعال می‌شود">
