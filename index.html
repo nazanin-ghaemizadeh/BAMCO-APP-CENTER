@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1320" />
+  <title>BAMCO APP CENTER | پرتال سامانه‌های سازمانی</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <style>
+    :root{
+      --bg:#060b13;
+      --bg-2:#0c1728;
+      --panel:rgba(12,20,34,.86);
+      --panel-2:rgba(255,255,255,.06);
+      --line:rgba(255,255,255,.1);
+      --text:#eef3fb;
+      --muted:#9eb0c8;
+      --accent:#5fa8ff;
+      --accent-2:#8fd3ff;
+      --gold:#d7b36a;
+      --ok:#41d39f;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:28px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Tahoma, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(95,168,255,.16), transparent 24%),
+        radial-gradient(circle at left center, rgba(215,179,106,.12), transparent 28%),
+        linear-gradient(135deg, #050913 0%, #09111d 36%, #0d1725 100%);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    body::before, body::after{
+      content:""; position:fixed; inset:auto; pointer-events:none; filter:blur(40px); opacity:.75; z-index:0;
+    }
+    body::before{width:260px; height:260px; right:-70px; top:90px; background:rgba(95,168,255,.18); border-radius:50%}
+    body::after{width:300px; height:300px; left:-90px; bottom:80px; background:rgba(215,179,106,.12); border-radius:50%}
+    .shell{position:relative; z-index:1; min-height:100%;}
+
+    .screen{display:none; min-height:100vh; padding:28px;}
+    .screen.active{display:flex}
+
+    .login-screen{align-items:center; justify-content:center;}
+    .login-wrap{
+      width:min(1240px, 100%);
+      display:grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap:24px;
+      align-items:stretch;
+    }
+    .hero, .login-card, .dashboard-shell{
+      background:linear-gradient(180deg, rgba(17,27,43,.9), rgba(10,16,27,.88));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      border-radius:32px;
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+    }
+    .hero{
+      position:relative;
+      padding:42px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:720px;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(95,168,255,.08), transparent 40%, rgba(215,179,106,.06));
+      pointer-events:none;
+    }
+    .hero-top, .hero-bottom{position:relative; z-index:1}
+    .brand-bar{display:flex; align-items:center; gap:18px; margin-bottom:24px;}
+    .brand-bar img{width:138px; max-width:32vw; height:auto; object-fit:contain; filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));}
+    .brand-copy small{display:block; color:var(--gold); letter-spacing:.2px; margin-bottom:8px; font-size:14px}
+    .brand-copy h1{margin:0; font-size:40px; line-height:1.15}
+    .brand-copy p{margin:12px 0 0; color:var(--muted); max-width:640px; line-height:1.9; font-size:16px}
+    .hero-stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:26px}
+    .hero-stat{padding:18px 16px; background:var(--panel-2); border:1px solid var(--line); border-radius:20px}
+    .hero-stat strong{display:block; font-size:24px; margin-bottom:8px}
+    .hero-stat span{color:var(--muted); font-size:14px; line-height:1.7}
+    .hero-preview{margin-top:32px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px}
+    .mini-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line); border-radius:24px; padding:18px;
+    }
+    .mini-card .mini-head{display:flex; align-items:center; gap:12px; margin-bottom:10px}
+    .mini-icon{width:50px; height:50px; display:grid; place-items:center; border-radius:16px; background:rgba(255,255,255,.05); border:1px solid var(--line)}
+    .mini-icon img{width:28px; height:28px}
+    .mini-card strong{display:block; font-size:16px}
+    .mini-card p{margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.8}
+
+    .login-card{padding:34px; display:flex; flex-direction:column; justify-content:center; min-height:720px;}
+    .login-header{margin-bottom:26px}
+    .login-header .chip{display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; background:rgba(215,179,106,.1); border:1px solid rgba(215,179,106,.24); color:#f4deaf; font-size:13px; margin-bottom:18px}
+    .login-header h2{margin:0 0 12px; font-size:34px; line-height:1.2}
+    .login-header p{margin:0; color:var(--muted); line-height:1.9}
+    .form-grid{display:grid; gap:16px; margin-top:22px}
+    .field{display:grid; gap:10px}
+    .field span{font-size:14px; color:#dfe8f7}
+    .field input{
+      width:100%; padding:16px 18px; border-radius:18px; border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05); color:var(--text); outline:none; font-size:15px;
+      transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+    .field input:focus{border-color:rgba(95,168,255,.55); box-shadow:0 0 0 4px rgba(95,168,255,.12)}
+    .login-actions{display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; margin-top:22px}
+    .primary-btn, .ghost-btn, .tile-link, .logout-btn, .back-btn{
+      border:none; cursor:pointer; border-radius:18px; transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+    }
+    .primary-btn:hover, .ghost-btn:hover, .tile-link:hover, .logout-btn:hover, .back-btn:hover{transform:translateY(-1px)}
+    .primary-btn{
+      padding:16px 20px; font-size:15px; color:#03101e;
+      background:linear-gradient(135deg, #a7dbff, #5fa8ff 60%, #3e8ef5);
+      box-shadow:0 12px 30px rgba(95,168,255,.26); font-weight:700;
+    }
+    .ghost-btn, .back-btn{
+      padding:16px 18px; font-size:14px; color:var(--text); background:rgba(255,255,255,.06); border:1px solid var(--line)
+    }
+    .hint-box{margin-top:18px; padding:16px 18px; border-radius:18px; background:rgba(255,255,255,.04); border:1px solid var(--line)}
+    .hint-box strong{display:block; font-size:14px; margin-bottom:8px}
+    .hint-box p{margin:0; color:var(--muted); font-size:13px; line-height:1.9}
+    .message{margin-top:14px; min-height:24px; font-size:14px}
+    .message.error{color:#ff9ea1}
+    .message.success{color:#7ae8bb}
+
+    .portal-screen{padding:20px}
+    .dashboard-shell{width:min(1380px, 100%); margin:0 auto; padding:22px; display:grid; gap:22px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:18px;
+      padding:16px 18px; border-radius:24px; border:1px solid var(--line); background:rgba(255,255,255,.04)
+    }
+    .topbar-right, .topbar-left{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+    .topbar-brand{display:flex; align-items:center; gap:12px}
+    .topbar-brand img{width:96px; height:auto; object-fit:contain; filter:drop-shadow(0 8px 16px rgba(0,0,0,.3));}
+    .topbar-brand div strong{display:block; font-size:22px}
+    .topbar-brand div span{display:block; color:var(--muted); margin-top:5px; font-size:13px}
+    .user-chip{display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:18px; background:rgba(255,255,255,.05); border:1px solid var(--line)}
+    .avatar{width:42px; height:42px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(95,168,255,.2), rgba(215,179,106,.16)); border:1px solid rgba(255,255,255,.1); font-weight:700}
+    .logout-btn{padding:12px 16px; color:#0a1626; font-weight:700; background:linear-gradient(135deg, #f0d8a0, #c9a85c);}
+
+    .hero-banner{padding:28px; border-radius:28px; border:1px solid var(--line); background:
+      linear-gradient(135deg, rgba(95,168,255,.14), rgba(95,168,255,.03) 40%),
+      linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      display:grid; grid-template-columns:1.15fr .85fr; gap:18px; align-items:center;
+    }
+    .hero-banner h2{margin:0 0 14px; font-size:34px; line-height:1.25}
+    .hero-banner p{margin:0; color:var(--muted); line-height:2}
+    .banner-panel{display:grid; gap:14px}
+    .banner-card{padding:16px 18px; border-radius:22px; background:rgba(255,255,255,.04); border:1px solid var(--line)}
+    .banner-card strong{display:block; margin-bottom:8px}
+    .banner-card span{color:var(--muted); font-size:13px; line-height:1.8}
+
+    .section-head{display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap}
+    .section-head h3{margin:0; font-size:24px}
+    .section-head p{margin:6px 0 0; color:var(--muted); font-size:14px}
+    .section-head .status-pill{padding:10px 14px; border-radius:999px; background:rgba(65,211,159,.12); border:1px solid rgba(65,211,159,.25); color:#9ff0cb; font-size:13px}
+
+    .apps-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px}
+    .app-tile{
+      position:relative;
+      padding:24px;
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      border:1px solid var(--line);
+      overflow:hidden;
+      min-height:260px;
+      display:grid;
+      gap:18px;
+      transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .app-tile:hover{transform:translateY(-3px); border-color:rgba(95,168,255,.3); box-shadow:0 16px 36px rgba(0,0,0,.22)}
+    .app-tile::before{
+      content:""; position:absolute; inset:auto -70px -110px auto; width:180px; height:180px; border-radius:50%; background:rgba(95,168,255,.08); filter:blur(10px)
+    }
+    .app-tile.coming-soon{border-style:dashed; opacity:.9}
+    .app-top{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; position:relative; z-index:1}
+    .app-icon{width:78px; height:78px; border-radius:24px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(95,168,255,.18), rgba(255,255,255,.05)); border:1px solid rgba(255,255,255,.1)}
+    .app-icon img{width:44px; height:44px}
+    .app-badge{padding:8px 12px; font-size:12px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid var(--line); color:#dbe8fb}
+    .app-badge.active{background:rgba(65,211,159,.14); border-color:rgba(65,211,159,.28); color:#a7f4d1}
+    .app-copy{position:relative; z-index:1}
+    .app-copy h4{margin:0 0 10px; font-size:24px}
+    .app-copy p{margin:0; color:var(--muted); line-height:2; font-size:14px}
+    .app-meta{display:flex; flex-wrap:wrap; gap:10px; position:relative; z-index:1}
+    .meta-pill{padding:9px 12px; border-radius:999px; background:rgba(255,255,255,.05); border:1px solid var(--line); color:#d5e2f7; font-size:12px}
+    .tile-link{
+      align-self:end; justify-self:start; position:relative; z-index:1;
+      display:inline-flex; align-items:center; gap:10px; padding:14px 18px; color:#071221; font-weight:700;
+      background:linear-gradient(135deg, #f0d8a0, #d7b36a);
+    }
+    .tile-link.disabled{background:rgba(255,255,255,.07); color:var(--muted); cursor:not-allowed; border:1px solid var(--line)}
+
+    .quick-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px}
+    .quick-card{padding:18px; border-radius:22px; background:rgba(255,255,255,.04); border:1px solid var(--line)}
+    .quick-card strong{display:block; margin-bottom:8px; font-size:18px}
+    .quick-card span{display:block; color:var(--muted); line-height:1.9; font-size:13px}
+
+    footer{padding:10px 2px 2px; text-align:center; color:#b5c4d9; font-size:13px; line-height:2}
+    footer b{color:#f1f5fd}
+
+    @media (max-width: 1100px){
+      .login-wrap, .hero-banner{grid-template-columns:1fr}
+      .hero, .login-card{min-height:auto}
+      .hero-preview, .apps-grid, .quick-grid, .hero-stats{grid-template-columns:1fr}
+    }
+    @media (max-width: 700px){
+      .screen, .portal-screen{padding:14px}
+      .hero, .login-card, .dashboard-shell{border-radius:24px}
+      .brand-bar{align-items:flex-start}
+      .brand-copy h1,.hero-banner h2,.login-header h2{font-size:28px}
+      .topbar{padding:14px}
+      .topbar, .topbar-right, .topbar-left{flex-direction:column; align-items:stretch}
+      .topbar-brand img{width:84px}
+      .login-actions{grid-template-columns:1fr}
+      .tile-link, .primary-btn, .ghost-btn, .back-btn, .logout-btn{width:100%; justify-content:center}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="screen login-screen active" id="loginScreen">
+      <div class="login-wrap">
+        <div class="hero">
+          <div class="hero-top">
+            <div class="brand-bar">
+              <img src="bamco-logo.png" alt="لوگوی خودروسازان بم" />
+              <div class="brand-copy">
+                <small>پرتال یکپارچه سامانه‌های سازمانی</small>
+                <h1>BAMCO APP CENTER</h1>
+                <p>
+                  دروازه ورودی سامانه‌های تخصصی سازمان. از اینجا می‌توانی بین اپ‌های مختلف جابه‌جا شوی،
+                  هر سامانه را مستقل مدیریت کنی و در آینده اپ‌های جدید را بدون به‌هم‌ریختن ساختار قبلی اضافه کنی.
+                </p>
+              </div>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat"><strong>۲</strong><span>سامانه فعال و آماده استفاده</span></div>
+              <div class="hero-stat"><strong>مستقل</strong><span>هر سامانه روی ریپوی خودش و با استقرار جداگانه</span></div>
+              <div class="hero-stat"><strong>قابل توسعه</strong><span>آماده برای اضافه‌شدن اپ‌های بعدی سازمان</span></div>
+            </div>
+            <div class="hero-preview">
+              <div class="mini-card">
+                <div class="mini-head">
+                  <div class="mini-icon"><img src="icons/vehicle-assessment.svg" alt="آیکون ارزیابی خودرو"></div>
+                  <div><strong>سامانه ارزیابی خودرو</strong><span style="color:var(--muted);font-size:12px">BAMCO-VEHICLE-ASSESSMENT</span></div>
+                </div>
+                <p>ثبت ارزیابی، نقش‌های ارزیاب و خبره، داشبورد مدیریتی و خروجی‌های پرونده.</p>
+              </div>
+              <div class="mini-card">
+                <div class="mini-head">
+                  <div class="mini-icon"><img src="icons/task-management.svg" alt="آیکون مدیریت وظایف"></div>
+                  <div><strong>سامانه مدیریت وظایف</strong><span style="color:var(--muted);font-size:12px">BAMCO-TASK-MANAGEMENT</span></div>
+                </div>
+                <p>مدیریت کارها، کانبان، آرشیو، داشبورد و گردش پیگیری امور سازمان.</p>
+              </div>
+            </div>
+          </div>
+          <div class="hero-bottom">
+            <footer>
+              توسعه یافته توسط واحد توسعه و تکوین محصول شرکت خودروسازان بم | <b>شهاب‌الدین تنهائیان</b> و <b>نازنین قائمی</b>
+            </footer>
+          </div>
+        </div>
+
+        <div class="login-card">
+          <div class="login-header">
+            <div class="chip">ورود به پرتال مرکزی سامانه‌ها</div>
+            <h2>ورود امن به مرکز سامانه‌های سازمانی</h2>
+            <p>
+              برای ورود از نام کاربری و رمز عبور استفاده کن. این نسخه فعلی درگاه سبک سازمانی است و می‌تواند بعداً به احراز هویت یکپارچه متصل شود.
+            </p>
+          </div>
+          <form id="loginForm" novalidate>
+            <div class="form-grid">
+              <label class="field">
+                <span>نام کاربری</span>
+                <input type="email" id="username" name="username" dir="ltr" autocomplete="username" placeholder="manager@bamco.ir" required>
+              </label>
+              <label class="field">
+                <span>رمز عبور</span>
+                <input type="password" id="password" name="password" dir="ltr" autocomplete="current-password" placeholder="123456" required>
+              </label>
+            </div>
+            <div class="login-actions">
+              <button class="primary-btn" type="submit">ورود به پرتال</button>
+              <button class="ghost-btn" type="button" id="guestButton">نمایش دمو</button>
+            </div>
+            <div id="loginMessage" class="message" aria-live="polite"></div>
+          </form>
+          <div class="hint-box">
+            <strong>ورود اولیه برای راه‌اندازی</strong>
+            <p>
+              کاربر نمونه مدیر: <span dir="ltr">manager@bamco.ir</span> با رمز <span dir="ltr">123456</span><br>
+              کاربر نمونه عمومی: <span dir="ltr">user@bamco.ir</span> با رمز <span dir="ltr">123456</span>
+            </p>
+          </div>
+          <div class="hint-box">
+            <strong>معماری این پرتال</strong>
+            <p>هر اپ روی ریپوی مستقل خودش باقی می‌ماند و این پرتال فقط نقش درگاه انتخاب و دسترسی را ایفا می‌کند.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen portal-screen" id="portalScreen">
+      <div class="dashboard-shell">
+        <div class="topbar">
+          <div class="topbar-right">
+            <div class="topbar-brand">
+              <img src="bamco-logo.png" alt="لوگوی خودروسازان بم" />
+              <div>
+                <strong>BAMCO APP CENTER</strong>
+                <span>پرتال یکپارچه سامانه‌های سازمانی خودروسازان بم</span>
+              </div>
+            </div>
+          </div>
+          <div class="topbar-left">
+            <div class="user-chip">
+              <div class="avatar" id="userAvatar">م</div>
+              <div>
+                <strong id="userDisplayName">مدیر سامانه‌ها</strong>
+                <div id="userRoleLabel" style="color:var(--muted); font-size:12px; margin-top:4px">دسترسی: مدیر</div>
+              </div>
+            </div>
+            <button class="logout-btn" type="button" id="logoutButton">خروج از پرتال</button>
+          </div>
+        </div>
+
+        <div class="hero-banner">
+          <div>
+            <h2>انتخاب سامانه و ورود سریع به اپلیکیشن‌های سازمانی</h2>
+            <p>
+              هر سامانه در زیرساخت خودش نگهداری می‌شود، اما تجربه ورود برای کاربران متمرکز و یکپارچه است.
+              از اینجا اپ موردنظر را انتخاب کن و مستقیم وارد همان سامانه شو.
+            </p>
+          </div>
+          <div class="banner-panel">
+            <div class="banner-card"><strong>ساختار توسعه</strong><span>هر سامانه ریپو، نسخه و انتشار مستقل دارد؛ نگهداری ساده‌تر و ریسک کمتر.</span></div>
+            <div class="banner-card"><strong>آماده توسعه بعدی</strong><span>اپ‌های جدید سازمان می‌توانند فقط با افزودن یک کارت جدید به این پرتال اضافه شوند.</span></div>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <div>
+            <h3>سامانه‌های فعال</h3>
+            <p>برای ورود به هر سامانه، روی دکمه اختصاصی همان کارت بزن.</p>
+          </div>
+          <div class="status-pill">پرتال مرکزی فعال است</div>
+        </div>
+
+        <div class="apps-grid">
+          <article class="app-tile">
+            <div class="app-top">
+              <div class="app-icon"><img src="icons/task-management.svg" alt="آیکون مدیریت وظایف"></div>
+              <div class="app-badge active">فعال</div>
+            </div>
+            <div class="app-copy">
+              <h4>سامانه مدیریت وظایف</h4>
+              <p>مدیریت، پایش و پیگیری امور؛ شامل کانبان، آرشیو، داشبورد و ماژول‌های کنترلی مرتبط با گردش کار سازمان.</p>
+            </div>
+            <div class="app-meta">
+              <span class="meta-pill">ریپو مستقل</span>
+              <span class="meta-pill">نسخه وب</span>
+              <span class="meta-pill">GitHub Pages</span>
+            </div>
+            <a class="tile-link" href="https://nazanin-ghaemizadeh.github.io/BAMCO-TASK-MANAGEMENT/" target="_blank" rel="noopener">ورود به سامانه ←</a>
+          </article>
+
+          <article class="app-tile">
+            <div class="app-top">
+              <div class="app-icon"><img src="icons/vehicle-assessment.svg" alt="آیکون ارزیابی خودرو"></div>
+              <div class="app-badge active">فعال</div>
+            </div>
+            <div class="app-copy">
+              <h4>سامانه ارزیابی خودرو</h4>
+              <p>ثبت پرونده ارزیابی خودرو، نقش‌های تخصصی ارزیاب و خبره، مدیریت پرونده، تحلیل و خروجی‌های قابل نگهداری.</p>
+            </div>
+            <div class="app-meta">
+              <span class="meta-pill">ریپو مستقل</span>
+              <span class="meta-pill">راهنمای داخلی</span>
+              <span class="meta-pill">خروجی اکسل و JSON</span>
+            </div>
+            <a class="tile-link" href="https://nazanin-ghaemizadeh.github.io/BAMCO-VEHICLE-ASSESSMENT/" target="_blank" rel="noopener">ورود به سامانه ←</a>
+          </article>
+
+          <article class="app-tile coming-soon">
+            <div class="app-top">
+              <div class="app-icon"><img src="icons/warehouse.svg" alt="آیکون مدیریت انبار"></div>
+              <div class="app-badge">به‌زودی</div>
+            </div>
+            <div class="app-copy">
+              <h4>سامانه مدیریت انبار</h4>
+              <p>فضای رزرو شده برای اپ‌های بعدی سازمان. این کارت آماده است تا با نهایی‌شدن سامانه جدید فعال شود.</p>
+            </div>
+            <div class="app-meta">
+              <span class="meta-pill">قابل افزودن</span>
+              <span class="meta-pill">ریپوی مستقل آینده</span>
+            </div>
+            <span class="tile-link disabled">در حال توسعه</span>
+          </article>
+
+          <article class="app-tile coming-soon">
+            <div class="app-top">
+              <div class="app-icon"><img src="icons/reports.svg" alt="آیکون گزارشات"></div>
+              <div class="app-badge">به‌زودی</div>
+            </div>
+            <div class="app-copy">
+              <h4>سامانه گزارشات و تحلیل</h4>
+              <p>جایگاه آماده برای ابزارهای تحلیلی، گزارش‌گیری سازمانی و داشبوردهای مدیریتی آینده.</p>
+            </div>
+            <div class="app-meta">
+              <span class="meta-pill">قابل توسعه</span>
+              <span class="meta-pill">پرتال‌پذیر</span>
+            </div>
+            <span class="tile-link disabled">در حال توسعه</span>
+          </article>
+        </div>
+
+        <div class="quick-grid">
+          <div class="quick-card"><strong>استقلال فنی</strong><span>هر سامانه روی مخزن خودش توسعه پیدا می‌کند و بروزرسانی یک اپ روی بقیه اثر جانبی نمی‌گذارد.</span></div>
+          <div class="quick-card"><strong>ورود یکپارچه آینده</strong><span>این پرتال آماده اتصال به احراز هویت متمرکز مانند Supabase Auth یا راهکارهای داخلی سازمان است.</span></div>
+          <div class="quick-card"><strong>مقیاس‌پذیری</strong><span>هر زمان اپ جدید ساخته شود، فقط کافی است یک کارت و لینک جدید به این صفحه اضافه شود.</span></div>
+        </div>
+
+        <footer>
+          توسعه یافته توسط واحد توسعه و تکوین محصول شرکت خودروسازان بم | <b>شهاب‌الدین تنهائیان</b> و <b>نازنین قائمی</b>
+        </footer>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function(){
+      const STORAGE_KEY = 'bamco-app-center-session';
+      const USERS_KEY = 'bamco-app-center-users';
+      const loginScreen = document.getElementById('loginScreen');
+      const portalScreen = document.getElementById('portalScreen');
+      const loginForm = document.getElementById('loginForm');
+      const loginMessage = document.getElementById('loginMessage');
+      const guestButton = document.getElementById('guestButton');
+      const logoutButton = document.getElementById('logoutButton');
+      const userDisplayName = document.getElementById('userDisplayName');
+      const userRoleLabel = document.getElementById('userRoleLabel');
+      const userAvatar = document.getElementById('userAvatar');
+
+      function seedUsers(){
+        const existing = localStorage.getItem(USERS_KEY);
+        if(existing) return;
+        const users = [
+          { username:'manager@bamco.ir', password:'123456', displayName:'مدیر سامانه‌ها', role:'مدیر' },
+          { username:'user@bamco.ir', password:'123456', displayName:'کاربر سازمان', role:'کاربر' }
+        ];
+        localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      }
+
+      function getUsers(){
+        seedUsers();
+        try { return JSON.parse(localStorage.getItem(USERS_KEY)) || []; }
+        catch(e){ return []; }
+      }
+
+      function setMessage(text, type=''){ 
+        loginMessage.textContent = text || '';
+        loginMessage.className = 'message' + (type ? ' ' + type : '');
+      }
+
+      function saveSession(user){
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+      }
+
+      function getSession(){
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); }
+        catch(e){ return null; }
+      }
+
+      function clearSession(){ localStorage.removeItem(STORAGE_KEY); }
+
+      function renderPortal(user){
+        if(!user) return;
+        userDisplayName.textContent = user.displayName || user.username;
+        userRoleLabel.textContent = 'دسترسی: ' + (user.role || 'کاربر');
+        userAvatar.textContent = (user.displayName || user.username || 'ک').trim().charAt(0);
+        loginScreen.classList.remove('active');
+        portalScreen.classList.add('active');
+      }
+
+      function showLogin(){
+        portalScreen.classList.remove('active');
+        loginScreen.classList.add('active');
+      }
+
+      loginForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim().toLowerCase();
+        const password = document.getElementById('password').value;
+        if(!username || !password){
+          setMessage('نام کاربری و رمز عبور را کامل وارد کن.', 'error');
+          return;
+        }
+        const user = getUsers().find(item => item.username.toLowerCase() === username && item.password === password);
+        if(!user){
+          setMessage('اطلاعات ورود درست نیست. از حساب نمونه یا حساب ذخیره‌شده استفاده کن.', 'error');
+          return;
+        }
+        saveSession(user);
+        setMessage('ورود با موفقیت انجام شد.', 'success');
+        renderPortal(user);
+      });
+
+      guestButton.addEventListener('click', function(){
+        const demoUser = { username:'demo@bamco.ir', displayName:'نمایش دمو', role:'مهمان' };
+        saveSession(demoUser);
+        renderPortal(demoUser);
+      });
+
+      logoutButton.addEventListener('click', function(){
+        clearSession();
+        showLogin();
+        setMessage('از پرتال خارج شدی.', 'success');
+        loginForm.reset();
+      });
+
+      seedUsers();
+      const activeSession = getSession();
+      if(activeSession){ renderPortal(activeSession); }
+      else { showLogin(); }
+    })();
+  </script>
+</body>
+</html>
