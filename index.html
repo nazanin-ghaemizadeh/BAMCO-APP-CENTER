@@ -11,7 +11,10 @@
 <meta name="apple-mobile-web-app-title" content="BAMCO">
 <link rel="preload" href="bamco-logo-official.png" as="image" fetchpriority="high">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/bac-favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/bac-favicon-16.png">
+<link rel="shortcut icon" href="icons/bac-favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/bac-apple-touch-180.png">
 <title>سامانه‌های مهندسی محصول | خودروسازان بم</title>
 <style>
 @font-face {
@@ -93,7 +96,6 @@ body {
   line-height: 1.9;
   overflow-wrap: anywhere;
 }
-.subtitle { margin: .25rem 0 0; font-size: .9375rem; color: var(--muted); }
 .list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -214,7 +216,7 @@ footer a {
   max-width: 100%;
   padding: 0 4px;
   color: var(--p);
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: .2em;
   text-decoration-thickness: 1px;
   border-radius: 4px;
@@ -226,25 +228,51 @@ footer a:focus-visible { outline: 3px solid #38205c; outline-offset: 2px; }
   .app:not(.app--soon):hover { border-color: #bda4db; box-shadow: 0 6px 18px rgba(35, 24, 50, .065); }
   a.go:hover { background: var(--p-hover); }
 }
-@media (max-width: 47.99rem) {
+/* Compact layouts keep the portal on one screen without clipping content. */
+.wrap { padding: 16px 24px; gap: 12px; }
+.hero { padding: 12px 20px; gap: 24px; }
+.logo { flex-basis: 160px; width: 160px; }
+.app { padding: 16px; row-gap: 12px; }
+.app-icon { width: 64px; height: 64px; }
+.app-icon > svg { width: 56px; height: 56px; }
+footer { padding: 0; font-size: .875rem; line-height: 1.6; }
+.footer-people { display: inline-block; max-width: 100%; }
+@media (max-width: 47.99rem), (max-height: 650px) {
   .wrap {
-    gap: 16px;
-    padding: 16px;
-    padding-top: max(16px, env(safe-area-inset-top));
-    padding-right: max(16px, env(safe-area-inset-right));
-    padding-bottom: max(16px, env(safe-area-inset-bottom));
-    padding-left: max(16px, env(safe-area-inset-left));
+    padding: 8px 12px;
+    padding-top: max(8px, env(safe-area-inset-top));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    padding-left: max(12px, env(safe-area-inset-left));
+    gap: 8px;
   }
-  .hero { flex-direction: column; gap: 8px; padding: 16px; text-align: center; }
-  .logo { flex: none; width: 144px; }
-  .title { font-size: 1.125rem; }
-  .subtitle { font-size: .875rem; }
-  .list { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .app { padding: 16px; row-gap: 14px; border-radius: 16px; }
-  .app-main { gap: 14px; }
-  .app-icon { width: 64px; height: 64px; border-radius: 14px; }
-  .app-icon > svg { width: 56px; height: 56px; }
-  .name { font-size: 1rem; }
+  .hero { flex-direction: row; padding: 8px 10px; gap: 8px; }
+  .logo { flex: 0 0 64px; width: 64px; }
+  .title { font-size: 1rem; line-height: 1.6; }
+  .list { gap: 8px; }
+  .app {
+    grid-template-columns: minmax(0, 1fr) 76px;
+    grid-template-areas: "main action" "status action";
+    grid-template-rows: auto auto;
+    padding: 8px;
+    row-gap: 4px;
+    column-gap: 8px;
+    border-radius: 12px;
+  }
+  .app-main { flex-wrap: nowrap; gap: 8px; }
+  .app-icon { width: 36px; height: 36px; border-radius: 8px; }
+  .app-icon > svg { width: 34px; height: 34px; }
+  .name { flex: 1 1 auto; font-size: .875rem; line-height: 1.5; }
+  .state { font-size: .875rem; line-height: 1.4; padding: 0 8px; }
+  .app-top { padding-inline-start: 44px; }
+  .go { min-height: 48px; padding: 4px; font-size: .875rem; line-height: 1.5; gap: 0; }
+  .go svg { display: none; }
+  .app--soon { grid-template-areas: "main main" "status status"; }
+  .app--soon .enter-row { display: none; }
+  footer a { padding: 0 2px; }
+}
+@media (max-width: 47.99rem) {
+  .list { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   .app, .go { transition: none; }
@@ -255,7 +283,7 @@ footer a:focus-visible { outline: 3px solid #38205c; outline-offset: 2px; }
 <main class="wrap">
 <header class="hero">
 <img class="logo" src="bamco-logo-official.png" alt="لوگوی شرکت خودروسازان بم" width="1661" height="577" loading="eager" decoding="sync" fetchpriority="high">
-<div class="hero-copy"><h1 class="title">سامانه یکپارچه واحد مهندسی توسعه و تکوین محصول</h1><p class="subtitle">شرکت خودروسازان بم</p></div>
+<div class="hero-copy"><h1 class="title">سامانه یکپارچه واحد مهندسی توسعه و تکوین محصول</h1></div>
 </header>
 <section class="list" aria-label="سامانه‌های سازمانی">
 <article class="app"><div class="app-top"><span class="state">فعال</span></div><div class="app-main"><div class="app-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="14" fill="#fff" stroke="#e7dcfb" stroke-width="2"/><rect x="18" y="16" width="28" height="6" rx="3" fill="#6d28d9"/><rect x="18" y="28" width="18" height="4" rx="2" fill="#c9b7ef"/><rect x="18" y="38" width="16" height="4" rx="2" fill="#c9b7ef"/><circle cx="44" cy="29" r="6" fill="#8b5cf6"/><path d="M41.2 29.1l2 2.2 3.8-4.7" fill="none" stroke="#fff" stroke-width="2.4"/><circle cx="44" cy="40" r="6" fill="#6d28d9"/><path d="M41.3 40.2l2 2.1 3.6-4.5" fill="none" stroke="#fff" stroke-width="2.4"/></svg></div><h2 class="name">سامانه مدیریت، پایش و پیگیری امور</h2></div><div class="enter-row"><a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-TASK-MANAGEMENT/" aria-label="ورود به سامانه مدیریت، پایش و پیگیری امور"><span>ورود به سامانه</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m11 6-6 6 6 6"/></svg></a></div></article>
@@ -263,7 +291,7 @@ footer a:focus-visible { outline: 3px solid #38205c; outline-offset: 2px; }
 <article class="app app--soon"><div class="app-top"><span class="state soon">به زودی</span></div><div class="app-main"><div class="app-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="14" fill="#fff" stroke="#e7dcfb" stroke-width="2"/><path d="M22 15h15l8 8v24a3 3 0 0 1-3 3H22a3 3 0 0 1-3-3V18a3 3 0 0 1 3-3z" fill="#f8f3ff" stroke="#8b5cf6" stroke-width="2"/><path d="M37 15v8h8" fill="none" stroke="#8b5cf6" stroke-width="2"/><path d="M25 28h13M25 33h8" fill="none" stroke="#c7b4ed" stroke-width="2.4"/><circle cx="36" cy="41" r="8" fill="#6d28d9"/><path d="M32.7 41.1l2.2 2.3 4.6-5.3" fill="none" stroke="#fff" stroke-width="2.4"/></svg></div><h2 class="name">سامانه همولوگیشن</h2></div><div class="enter-row"><span class="go disabled">در حال آماده‌سازی</span></div></article>
 <article class="app app--soon"><div class="app-top"><span class="state soon">به زودی</span></div><div class="app-main"><div class="app-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="11" r="3" fill="#8b5cf6"/><path d="M32 14v5" stroke="#6d28d9" stroke-width="2.5" stroke-linecap="round"/><rect x="14" y="18" width="36" height="31" rx="9" fill="#f8f3ff" stroke="#6d28d9" stroke-width="2.4"/><rect x="20" y="24" width="24" height="16" rx="6" fill="#8b5cf6"/><circle cx="27" cy="32" r="2.2" fill="#fff"/><circle cx="37" cy="32" r="2.2" fill="#fff"/><path d="M27 38c2.8 2.1 7.2 2.1 10 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M14 29h-4M54 29h-4" stroke="#6d28d9" stroke-width="2.5" stroke-linecap="round"/><path d="M40 36h10a6 6 0 0 1 6 6v5a6 6 0 0 1-6 6h-4l-5 5v-5h-1a6 6 0 0 1-6-6v-5a6 6 0 0 1 6-6z" fill="#6d28d9" stroke="#fff" stroke-width="1.4"/><circle cx="42" cy="45" r="1.5" fill="#fff"/><circle cx="47" cy="45" r="1.5" fill="#fff"/><circle cx="52" cy="45" r="1.5" fill="#fff"/></svg></div><h2 class="name">سامانه دستیار هوشمند راهنمای مشتری</h2></div><div class="enter-row"><span class="go disabled">در حال آماده‌سازی</span></div></article>
 </section>
-<footer>توسعه یافته توسط واحد توسعه و تکوین محصول <a href="https://www.linkedin.com/company/bam-automotive-company/" target="_blank" rel="noopener noreferrer">شرکت خودروسازان بم</a> | <a href="https://www.linkedin.com/in/shahab-tanhaiyan-b1156a10a/" target="_blank" rel="noopener noreferrer">شهاب‌الدین تنهائیان</a> و <a href="https://www.linkedin.com/in/nazanin-ghaemizadeh/" target="_blank" rel="noopener noreferrer">نازنین قائمی</a></footer>
+<footer><a href="https://www.linkedin.com/company/bam-automotive-company/" target="_blank" rel="noopener noreferrer">شرکت خودروسازان بم</a><span aria-hidden="true"> | </span><span class="footer-unit">واحد توسعه و تکوین محصول</span><span aria-hidden="true"> | </span><span class="footer-people"><a href="https://www.linkedin.com/in/shahab-tanhaiyan-b1156a10a/" target="_blank" rel="noopener noreferrer">شهاب‌الدین تنهائیان</a> و <a href="https://www.linkedin.com/in/nazanin-ghaemizadeh/" target="_blank" rel="noopener noreferrer">نازنین قائمی</a></span></footer>
 </main>
 <script>
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{})})}
