@@ -45,9 +45,10 @@ body:after{width:300px;height:300px;left:-120px;bottom:50px;border:1px solid rgb
 .go{width:54px;height:54px;border-radius:18px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;text-decoration:none;box-shadow:0 12px 26px rgba(111,45,189,.20);transition:transform .18s ease,box-shadow .18s ease}.go:hover{transform:scale(1.06);box-shadow:0 14px 30px rgba(111,45,189,.26)}
 .go svg{width:25px;height:25px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.go.disabled{background:#f3eff8;box-shadow:none;border:1px solid var(--line);cursor:default}.go.disabled svg{stroke:#b7a8ce}
 footer{padding:0 12px;text-align:center;color:var(--muted);font-size:14px;font-weight:400;line-height:1.8}
+.install-btn{position:fixed;left:22px;bottom:22px;z-index:100;border:0;border-radius:16px;padding:12px 18px;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;box-shadow:0 12px 28px rgba(111,45,189,.28);font-family:"B Nazanin",Tahoma,Arial,sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}.install-btn:hover{transform:translateY(-2px);box-shadow:0 15px 32px rgba(111,45,189,.34)}.install-btn[hidden]{display:none}.install-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 @media(min-width:901px) and (max-height:720px){.wrap{padding:12px 0 8px;gap:12px}.hero{padding:14px 20px 16px;border-radius:26px}.logo{width:125px;margin-bottom:5px}.title{font-size:25px;line-height:1.5}.subtitle{font-size:15px;line-height:1.5}.app{padding:17px 18px 16px;border-radius:25px}.app-top{margin-bottom:2px}.app-icon{width:136px;height:136px;border-radius:33px;margin-bottom:7px}.app-icon:before{width:98px;height:98px;box-shadow:0 0 0 12px rgba(139,92,246,.035)}.app-icon img{width:98px;height:98px}.name{font-size:19px;line-height:1.55}.enter-row{padding-top:7px}.go{width:46px;height:46px;border-radius:15px}footer{font-size:12.5px;line-height:1.6}}
 @media(max-width:900px){body{overflow-y:auto}.wrap{height:auto;min-height:100vh;min-height:100dvh;width:min(100% - 24px,1040px);display:flex;flex-direction:column}.list{grid-template-columns:1fr}.app{min-height:292px;height:auto}}
-@media(max-width:650px){.wrap{padding-top:18px}.hero{padding:20px 14px 22px;border-radius:24px}.logo{width:132px}.title{font-size:22px;line-height:1.7}.subtitle{font-size:15px}.app{padding:18px;border-radius:24px;min-height:282px}.app-icon{width:126px;height:126px;border-radius:31px;margin-bottom:9px}.app-icon:before{width:92px;height:92px;box-shadow:0 0 0 10px rgba(139,92,246,.035)}.app-icon img{width:90px;height:90px}.name{font-size:19px;line-height:1.6}.state{font-size:13px}.go{width:49px;height:49px}footer{font-size:12.5px;padding-top:8px}}
+@media(max-width:650px){.wrap{padding-top:18px}.hero{padding:20px 14px 22px;border-radius:24px}.logo{width:132px}.title{font-size:22px;line-height:1.7}.subtitle{font-size:15px}.app{padding:18px;border-radius:24px;min-height:282px}.app-icon{width:126px;height:126px;border-radius:31px;margin-bottom:9px}.app-icon:before{width:92px;height:92px;box-shadow:0 0 0 10px rgba(139,92,246,.035)}.app-icon img{width:90px;height:90px}.name{font-size:19px;line-height:1.6}.state{font-size:13px}.go{width:49px;height:49px}footer{font-size:12.5px;padding-top:8px}.install-btn{left:14px;bottom:14px;padding:10px 14px;border-radius:14px;font-size:13px}}
 </style>
 </head>
 <body>
@@ -79,10 +80,40 @@ footer{padding:0 12px;text-align:center;color:var(--muted);font-size:14px;font-w
 </section>
 <footer>توسعه یافته توسط واحد توسعه و تکوین محصول شرکت خودروسازان بم | شهاب‌الدین تنهائیان و نازنین قائمی</footer>
 </main>
+<button id="installApp" class="install-btn" type="button" hidden aria-label="نصب BAMCO"><svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span>نصب BAMCO</span></button>
 <script>
+let deferredInstallPrompt = null;
+const installBtn = document.getElementById('installApp');
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+if (!isStandalone) installBtn.hidden = false;
+
+window.addEventListener('beforeinstallprompt', event => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  installBtn.hidden = false;
+});
+
+installBtn.addEventListener('click', async () => {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    return;
+  }
+  if (isIOS) {
+    alert('در Safari روی Share بزنید و سپس Add to Home Screen را انتخاب کنید. نام آیکون BAMCO خواهد بود.');
+  } else {
+    alert('اگر پنجره نصب خودکار باز نشد، در Chrome یا Edge از منوی مرورگر گزینه Install BAMCO یا نصب برنامه را انتخاب کنید.');
+  }
+});
+
+window.addEventListener('appinstalled', () => { installBtn.hidden = true; });
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
+    navigator.serviceWorker.register('./sw.js', {updateViaCache:'none'}).then(reg => reg.update()).catch(() => {});
   });
 }
 </script>
