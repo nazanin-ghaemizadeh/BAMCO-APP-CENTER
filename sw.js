@@ -1,10 +1,12 @@
-const CACHE_NAME = 'bamco-app-center-v1';
+const CACHE_NAME = 'bamco-app-center-v2';
 const APP_SHELL = [
   '/BAMCO-APP-CENTER/',
   '/BAMCO-APP-CENTER/index.html',
   '/BAMCO-APP-CENTER/manifest.webmanifest',
   '/BAMCO-APP-CENTER/bamco-logo.png',
   '/BAMCO-APP-CENTER/favicon.svg',
+  '/BAMCO-APP-CENTER/icons/pwa-192.svg',
+  '/BAMCO-APP-CENTER/icons/pwa-512.svg',
   '/BAMCO-APP-CENTER/icons/task-management.svg',
   '/BAMCO-APP-CENTER/icons/vehicle-assessment.svg',
   '/BAMCO-APP-CENTER/icons/homologation.svg'
@@ -30,7 +32,7 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
-    fetch(event.request)
+    fetch(event.request, {cache:'no-store'})
       .then(response => {
         const copy = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
