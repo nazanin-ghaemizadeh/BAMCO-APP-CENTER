@@ -1,0 +1,24 @@
+{
+  "id": "/BAMCO-APP-CENTER/",
+  "name": "BAMCO",
+  "short_name": "BAMCO",
+  "description": "سامانه یکپارچه واحد مهندسی توسعه و تکوین محصول شرکت خودروسازان بم",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/BAMCO-APP-CENTER/",
+  "scope": "/BAMCO-APP-CENTER/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#6f2dbd",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "bamco-logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
