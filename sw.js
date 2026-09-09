@@ -1,16 +1,16 @@
-const CACHE_NAME = 'bamco-app-center-v12';
+const CACHE_NAME = 'bamco-app-center-v13';
 const APP_SHELL = [
   '/BAMCO-APP-CENTER/',
   '/BAMCO-APP-CENTER/index.html',
   '/BAMCO-APP-CENTER/manifest.webmanifest',
   '/BAMCO-APP-CENTER/bamco-logo-official.png',
-  '/BAMCO-APP-CENTER/icons/bac-favicon-32.png',
-  '/BAMCO-APP-CENTER/icons/bac-favicon-16.png',
-  '/BAMCO-APP-CENTER/icons/bac-favicon.ico',
-  '/BAMCO-APP-CENTER/icons/bac-apple-touch-180.png',
-  '/BAMCO-APP-CENTER/icons/bac-app-192.png',
-  '/BAMCO-APP-CENTER/icons/bac-app-512.png',
-  '/BAMCO-APP-CENTER/icons/bac-maskable-512.png',
+  '/BAMCO-APP-CENTER/icons/bac-black-favicon-32.png',
+  '/BAMCO-APP-CENTER/icons/bac-black-favicon-16.png',
+  '/BAMCO-APP-CENTER/icons/bac-black-favicon.ico',
+  '/BAMCO-APP-CENTER/icons/bac-black-apple-touch-180.png',
+  '/BAMCO-APP-CENTER/icons/bac-black-app-192.png',
+  '/BAMCO-APP-CENTER/icons/bac-black-app-512.png',
+  '/BAMCO-APP-CENTER/icons/bac-black-maskable-512.png',
   '/BAMCO-APP-CENTER/fonts/Vazirmatn-Regular.woff2',
   '/BAMCO-APP-CENTER/fonts/Vazirmatn-Bold.woff2'
 ];
