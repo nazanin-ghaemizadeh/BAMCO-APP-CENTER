@@ -12,18 +12,19 @@
   "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#6f2dbd",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "bamco-logo.png",
-      "sizes": "any",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
       "src": "bamco-logo.png",
-      "sizes": "any",
+      "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     }
   ]
 }
