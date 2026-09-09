@@ -1,9 +1,9 @@
-const CACHE_NAME = 'bamco-app-center-v5';
+const CACHE_NAME = 'bamco-app-center-v6';
 const APP_SHELL = [
   '/BAMCO-APP-CENTER/',
   '/BAMCO-APP-CENTER/index.html',
   '/BAMCO-APP-CENTER/manifest.webmanifest',
-  '/BAMCO-APP-CENTER/bamco-logo.png',
+  '/BAMCO-APP-CENTER/bamco-logo-fast-small.png',
   '/BAMCO-APP-CENTER/favicon.svg'
 ];
 
