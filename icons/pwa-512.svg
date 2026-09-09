@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="116" fill="#ffffff"/>
+  <path d="M112 274 L336 120 L219 253 L336 392 Z" fill="#6f2dbd"/>
+  <circle cx="376" cy="256" r="40" fill="#8b5cf6"/>
+  <text x="256" y="462" text-anchor="middle" font-family="Arial,sans-serif" font-size="54" font-weight="700" fill="#6f2dbd">BAMCO</text>
+</svg>
