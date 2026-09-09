@@ -16,106 +16,86 @@
 <link rel="icon" type="image/png" href="bamco-logo.png">
 <title>BAMCO</title>
 <style>
-:root{--p:#6f2dbd;--p2:#8b5cf6;--p3:#a78bfa;--soft:#f8f4ff;--line:#e9def9;--text:#30223f;--muted:#87789f;--shadow:0 18px 48px rgba(111,45,189,.10)}
-*{box-sizing:border-box}html,body{height:100%;min-height:100%}
-body{margin:0;color:var(--text);font-family:"B Nazanin","BNazanin","B Nazanin Bold",Tahoma,Arial,sans-serif;background:radial-gradient(circle at 8% 12%,rgba(139,92,246,.16),transparent 24%),radial-gradient(circle at 92% 18%,rgba(111,45,189,.10),transparent 22%),radial-gradient(circle at 50% 100%,rgba(167,139,250,.12),transparent 30%),linear-gradient(180deg,#fff 0%,#fdfbff 54%,#faf7ff 100%);overflow:hidden}
+:root{--p:#6f2dbd;--p2:#8b5cf6;--p3:#a78bfa;--soft:#f8f4ff;--line:#e9def9;--text:#30223f;--muted:#87789f;--shadow:0 14px 34px rgba(111,45,189,.10)}
+*{box-sizing:border-box}html,body{min-height:100%}
+body{margin:0;color:var(--text);font-family:"B Nazanin","BNazanin","B Nazanin Bold",Tahoma,Arial,sans-serif;background:radial-gradient(circle at 8% 12%,rgba(139,92,246,.14),transparent 24%),radial-gradient(circle at 92% 18%,rgba(111,45,189,.09),transparent 22%),linear-gradient(180deg,#fff 0%,#fdfbff 54%,#faf7ff 100%);overflow-y:auto}
 body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;pointer-events:none}
-body:before{width:360px;height:360px;right:-140px;top:120px;border:1px solid rgba(111,45,189,.11);box-shadow:0 0 0 44px rgba(111,45,189,.025),0 0 0 88px rgba(111,45,189,.018)}
-body:after{width:300px;height:300px;left:-120px;bottom:50px;border:1px solid rgba(139,92,246,.10);box-shadow:0 0 0 38px rgba(139,92,246,.022),0 0 0 76px rgba(139,92,246,.014)}
-.wrap{height:100vh;height:100dvh;width:calc(100% - 48px);max-width:1400px;margin:auto;padding:18px 0 12px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:18px}
-.hero{position:relative;overflow:hidden;padding:20px 24px 22px;margin:0;text-align:center;border:1px solid rgba(111,45,189,.10);border-radius:30px;background:rgba(255,255,255,.80);box-shadow:0 14px 38px rgba(111,45,189,.07);backdrop-filter:blur(14px)}
-.hero:before{content:"";position:absolute;inset:auto -12% -90px auto;width:270px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.15),rgba(139,92,246,0) 70%)}
-.logo{display:block;width:145px;max-width:48vw;height:auto;margin:0 auto 8px;position:relative;z-index:1}
-.title{position:relative;z-index:1;margin:0;color:var(--p);font-size:29px;font-weight:700;line-height:1.65}
-.subtitle{position:relative;z-index:1;margin:0;color:var(--muted);font-size:17px;line-height:1.6}
-.list{min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
-.app{position:relative;overflow:hidden;min-height:0;height:100%;padding:22px 22px 20px;border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.94);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-.app:before{content:"";position:absolute;right:0;top:0;width:100%;height:5px;background:linear-gradient(90deg,var(--p3),var(--p));opacity:.9}
-.app:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;left:-95px;bottom:-120px;background:radial-gradient(circle,rgba(139,92,246,.09),rgba(139,92,246,0) 70%);pointer-events:none}
-.app:hover{transform:translateY(-4px);border-color:#dcccfa;box-shadow:0 22px 56px rgba(111,45,189,.14)}
-.app-top{width:100%;display:flex;align-items:center;justify-content:flex-start;min-height:32px;margin-bottom:6px}
-.state{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--p);font-size:14px;font-weight:700;white-space:nowrap}
-.state:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--p2);box-shadow:0 0 0 4px rgba(139,92,246,.10)}
+body:before{width:340px;height:340px;right:-150px;top:130px;border:1px solid rgba(111,45,189,.09);box-shadow:0 0 0 42px rgba(111,45,189,.02)}
+body:after{width:280px;height:280px;left:-130px;bottom:60px;border:1px solid rgba(139,92,246,.08);box-shadow:0 0 0 36px rgba(139,92,246,.018)}
+.wrap{width:min(calc(100% - 40px),1180px);min-height:100vh;min-height:100dvh;margin:auto;padding:16px 0 12px;display:grid;grid-template-rows:auto 1fr auto;gap:14px}
+.hero{position:relative;overflow:hidden;padding:15px 22px 17px;text-align:center;border:1px solid rgba(111,45,189,.10);border-radius:28px;background:rgba(255,255,255,.86);box-shadow:0 12px 32px rgba(111,45,189,.07);backdrop-filter:blur(12px)}
+.hero:before{content:"";position:absolute;inset:auto -10% -90px auto;width:250px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.13),rgba(139,92,246,0) 70%)}
+.logo{display:block;width:128px;max-width:44vw;height:auto;margin:0 auto 5px;position:relative;z-index:1}
+.title{position:relative;z-index:1;margin:0;color:var(--p);font-size:26px;font-weight:700;line-height:1.55}
+.subtitle{position:relative;z-index:1;margin:0;color:var(--muted);font-size:15px;line-height:1.5}
+.install-btn{position:absolute;left:18px;top:18px;z-index:5;border:1px solid #e2d5f7;border-radius:14px;padding:9px 13px;display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--p);box-shadow:0 8px 20px rgba(111,45,189,.10);font-family:"B Nazanin",Tahoma,Arial,sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease}.install-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(111,45,189,.16)}.install-btn[hidden]{display:none}.install-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.list{min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:14px;align-items:stretch}
+.app{position:relative;overflow:hidden;min-height:220px;padding:15px 18px 16px;border:1px solid var(--line);border-radius:25px;background:rgba(255,255,255,.95);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;content-visibility:auto;contain-intrinsic-size:260px}
+.app:before{content:"";position:absolute;right:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,var(--p3),var(--p));opacity:.9}
+.app:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;left:-80px;bottom:-105px;background:radial-gradient(circle,rgba(139,92,246,.08),rgba(139,92,246,0) 70%);pointer-events:none}
+.app:hover{transform:translateY(-3px);border-color:#d8c7f5;box-shadow:0 18px 42px rgba(111,45,189,.13)}
+.app-top{width:100%;display:flex;align-items:center;justify-content:flex-start;min-height:27px;margin-bottom:2px}
+.state{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--p);font-size:13px;font-weight:700;white-space:nowrap}
+.state:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--p2);box-shadow:0 0 0 3px rgba(139,92,246,.10)}
 .state.soon{color:#9987b4;background:#faf8fd}.state.soon:before{background:#b7a7cd;box-shadow:none}
-.app-icon{position:relative;flex:0 0 auto;width:174px;height:174px;margin:0 auto 12px;border-radius:42px;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.98) 0 16%,transparent 17%),linear-gradient(145deg,#ffffff 0%,#f8f3ff 48%,#eee4ff 100%);border:1px solid #dfd0f7;box-shadow:0 18px 36px rgba(111,45,189,.14),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -18px 34px rgba(139,92,246,.045);isolation:isolate}
-.app-icon:before,.app-icon:after{content:"";position:absolute;border-radius:50%;z-index:-1}.app-icon:before{width:130px;height:130px;background:rgba(139,92,246,.08);box-shadow:0 0 0 16px rgba(139,92,246,.035)}.app-icon:after{width:23px;height:23px;left:19px;top:19px;background:linear-gradient(135deg,var(--p3),var(--p2));opacity:.22}
-.app-icon img{width:126px;height:126px;display:block;filter:drop-shadow(0 10px 16px rgba(111,45,189,.13));transform:scale(1.02)}
-.name{margin:0 auto;max-width:95%;font-size:22px;font-weight:700;line-height:1.75;text-align:center}
-.enter-row{width:100%;margin-top:auto;padding-top:14px;display:flex;justify-content:center;position:relative;z-index:2}
-.go{width:54px;height:54px;border-radius:18px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;text-decoration:none;box-shadow:0 12px 26px rgba(111,45,189,.20);transition:transform .18s ease,box-shadow .18s ease}.go:hover{transform:scale(1.06);box-shadow:0 14px 30px rgba(111,45,189,.26)}
-.go svg{width:25px;height:25px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.go.disabled{background:#f3eff8;box-shadow:none;border:1px solid var(--line);cursor:default}.go.disabled svg{stroke:#b7a8ce}
-footer{padding:0 12px;text-align:center;color:var(--muted);font-size:14px;font-weight:400;line-height:1.8}
-.install-btn{position:fixed;left:22px;bottom:22px;z-index:100;border:0;border-radius:16px;padding:12px 18px;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;box-shadow:0 12px 28px rgba(111,45,189,.28);font-family:"B Nazanin",Tahoma,Arial,sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}.install-btn:hover{transform:translateY(-2px);box-shadow:0 15px 32px rgba(111,45,189,.34)}.install-btn[hidden]{display:none}.install-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-@media(min-width:901px) and (max-height:720px){.wrap{padding:12px 0 8px;gap:12px}.hero{padding:14px 20px 16px;border-radius:26px}.logo{width:125px;margin-bottom:5px}.title{font-size:25px;line-height:1.5}.subtitle{font-size:15px;line-height:1.5}.app{padding:17px 18px 16px;border-radius:25px}.app-top{margin-bottom:2px}.app-icon{width:136px;height:136px;border-radius:33px;margin-bottom:7px}.app-icon:before{width:98px;height:98px;box-shadow:0 0 0 12px rgba(139,92,246,.035)}.app-icon img{width:98px;height:98px}.name{font-size:19px;line-height:1.55}.enter-row{padding-top:7px}.go{width:46px;height:46px;border-radius:15px}footer{font-size:12.5px;line-height:1.6}}
-@media(max-width:900px){body{overflow-y:auto}.wrap{height:auto;min-height:100vh;min-height:100dvh;width:min(100% - 24px,1040px);display:flex;flex-direction:column}.list{grid-template-columns:1fr}.app{min-height:292px;height:auto}}
-@media(max-width:650px){.wrap{padding-top:18px}.hero{padding:20px 14px 22px;border-radius:24px}.logo{width:132px}.title{font-size:22px;line-height:1.7}.subtitle{font-size:15px}.app{padding:18px;border-radius:24px;min-height:282px}.app-icon{width:126px;height:126px;border-radius:31px;margin-bottom:9px}.app-icon:before{width:92px;height:92px;box-shadow:0 0 0 10px rgba(139,92,246,.035)}.app-icon img{width:90px;height:90px}.name{font-size:19px;line-height:1.6}.state{font-size:13px}.go{width:49px;height:49px}footer{font-size:12.5px;padding-top:8px}.install-btn{left:14px;bottom:14px;padding:10px 14px;border-radius:14px;font-size:13px}}
+.app-icon{position:relative;flex:0 0 auto;width:106px;height:106px;margin:0 auto 6px;border-radius:28px;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.98) 0 16%,transparent 17%),linear-gradient(145deg,#ffffff 0%,#f8f3ff 48%,#eee4ff 100%);border:1px solid #dfd0f7;box-shadow:0 12px 26px rgba(111,45,189,.11),inset 0 1px 0 rgba(255,255,255,.95);isolation:isolate}
+.app-icon:before,.app-icon:after{content:"";position:absolute;border-radius:50%;z-index:-1}.app-icon:before{width:78px;height:78px;background:rgba(139,92,246,.07);box-shadow:0 0 0 10px rgba(139,92,246,.03)}.app-icon:after{width:17px;height:17px;left:12px;top:12px;background:linear-gradient(135deg,var(--p3),var(--p2));opacity:.2}
+.app-icon>svg{width:78px;height:78px;display:block;filter:drop-shadow(0 7px 11px rgba(111,45,189,.10))}
+.name{margin:0 auto;max-width:96%;font-size:19px;font-weight:700;line-height:1.55;text-align:center}
+.enter-row{width:100%;margin-top:auto;padding-top:8px;display:flex;justify-content:center;position:relative;z-index:2}
+.go{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,var(--p),var(--p2));display:grid;place-items:center;text-decoration:none;box-shadow:0 9px 20px rgba(111,45,189,.18);transition:transform .16s ease,box-shadow .16s ease}.go:hover{transform:scale(1.05);box-shadow:0 11px 24px rgba(111,45,189,.23)}
+.go svg{width:21px;height:21px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.go.disabled{background:#f3eff8;box-shadow:none;border:1px solid var(--line);cursor:default}.go.disabled svg{stroke:#b7a8ce}
+footer{padding:1px 12px;text-align:center;color:var(--muted);font-size:13px;font-weight:400;line-height:1.65}
+@media(max-height:760px) and (min-width:701px){.wrap{padding:10px 0 8px;gap:10px}.hero{padding:10px 18px 12px;border-radius:23px}.logo{width:105px;margin-bottom:2px}.title{font-size:22px;line-height:1.4}.subtitle{font-size:13px}.install-btn{left:14px;top:14px;padding:7px 11px;font-size:13px}.list{gap:10px}.app{min-height:185px;padding:10px 14px 11px;border-radius:22px}.app-top{min-height:23px}.state{font-size:11.5px;padding:4px 8px}.app-icon{width:78px;height:78px;border-radius:21px;margin-bottom:3px}.app-icon:before{width:58px;height:58px;box-shadow:0 0 0 7px rgba(139,92,246,.03)}.app-icon>svg{width:59px;height:59px}.name{font-size:16.5px;line-height:1.4}.enter-row{padding-top:4px}.go{width:36px;height:36px;border-radius:12px}.go svg{width:18px;height:18px}footer{font-size:11.5px}}
+@media(max-width:700px){.wrap{width:min(calc(100% - 22px),620px);display:flex;flex-direction:column;padding:12px 0}.hero{padding:17px 13px 15px;border-radius:23px}.logo{width:118px}.title{font-size:20px;line-height:1.65}.subtitle{font-size:14px}.install-btn{position:static;margin:10px auto 0;padding:8px 12px;font-size:13px}.list{grid-template-columns:1fr;grid-template-rows:none;gap:12px}.app{min-height:215px;border-radius:23px}.app-icon{width:94px;height:94px;border-radius:25px}.app-icon>svg{width:69px;height:69px}.name{font-size:18px}.go{width:41px;height:41px}footer{font-size:12px;padding:4px 8px}}
 </style>
 </head>
 <body>
 <main class="wrap">
 <header class="hero">
-<img class="logo" src="bamco-logo.png" alt="لوگوی شرکت خودروسازان بم">
+<button id="installApp" class="install-btn" type="button" hidden aria-label="نصب نرم افزار"><svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span>نصب نرم‌افزار</span></button>
+<img class="logo" src="bamco-logo.png" alt="لوگوی شرکت خودروسازان بم" width="1474" height="770" decoding="async" fetchpriority="high">
 <h1 class="title">سامانه یکپارچه واحد مهندسی توسعه و تکوین محصول</h1>
 <p class="subtitle">شرکت خودروسازان بم</p>
 </header>
 <section class="list" aria-label="سامانه‌های سازمانی">
 <article class="app">
 <div class="app-top"><span class="state">فعال</span></div>
-<div class="app-icon"><img src="icons/task-management.svg" alt="آیکون سامانه مدیریت امور"></div>
+<div class="app-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="14" fill="#fff" stroke="#e7dcfb" stroke-width="2"/><rect x="18" y="16" width="28" height="6" rx="3" fill="#6d28d9"/><rect x="18" y="28" width="18" height="4" rx="2" fill="#c9b7ef"/><rect x="18" y="38" width="16" height="4" rx="2" fill="#c9b7ef"/><circle cx="44" cy="29" r="6" fill="#8b5cf6"/><path d="M41.2 29.1l2 2.2 3.8-4.7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="44" cy="40" r="6" fill="#6d28d9"/><path d="M41.3 40.2l2 2.1 3.6-4.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <h2 class="name">سامانه مدیریت، پایش و پیگیری امور</h2>
 <div class="enter-row"><a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-TASK-MANAGEMENT/" aria-label="ورود به سامانه مدیریت، پایش و پیگیری امور"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></div>
 </article>
 <article class="app">
 <div class="app-top"><span class="state">فعال</span></div>
-<div class="app-icon"><img src="icons/vehicle-assessment.svg" alt="آیکون سامانه ارزیابی عملکرد خودرو"></div>
+<div class="app-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="14" fill="#fff" stroke="#e7dcfb" stroke-width="2"/><path d="M18 38l3-10c.5-1.8 2.1-3 4-3h14c1.8 0 3.5 1.1 4.1 2.8l3.8 10.2" fill="none" stroke="#6d28d9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 38h26c2.2 0 4 1.8 4 4v2H15v-2c0-2.2 1.8-4 4-4z" fill="#f2ebff" stroke="#e7dcfb"/><circle cx="24" cy="44" r="3" fill="#6d28d9"/><circle cx="40" cy="44" r="3" fill="#6d28d9"/><path d="M32 16l8 4v6c0 5.1-3.4 9-8 10.4-4.6-1.4-8-5.3-8-10.4v-6l8-4z" fill="#f7f2ff" stroke="#8b5cf6" stroke-width="2"/><path d="M29 26l2.3 2.4 4.5-5.2" fill="none" stroke="#6d28d9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 <h2 class="name">سامانه ارزیابی عملکرد خودرو</h2>
 <div class="enter-row"><a class="go" href="https://nazanin-ghaemizadeh.github.io/BAMCO-VEHICLE-ASSESSMENT/" aria-label="ورود به سامانه ارزیابی عملکرد خودرو"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></div>
 </article>
 <article class="app">
 <div class="app-top"><span class="state soon">به زودی</span></div>
-<div class="app-icon"><img src="icons/homologation.svg" alt="آیکون سامانه همولوگیشن"></div>
+<div class="app-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="14" fill="#fff" stroke="#e7dcfb" stroke-width="2"/><path d="M22 15h15l8 8v24a3 3 0 0 1-3 3H22a3 3 0 0 1-3-3V18a3 3 0 0 1 3-3z" fill="#f8f3ff" stroke="#8b5cf6" stroke-width="2"/><path d="M37 15v8h8" fill="none" stroke="#8b5cf6" stroke-width="2"/><path d="M25 28h13M25 33h8" fill="none" stroke="#c7b4ed" stroke-width="2.4" stroke-linecap="round"/><circle cx="36" cy="41" r="8" fill="#6d28d9"/><path d="M32.7 41.1l2.2 2.3 4.6-5.3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M31.6 48.2l-2 6 6.4-3 6.4 3-2-6" fill="#8b5cf6"/></svg></div>
 <h2 class="name">سامانه همولوگیشن</h2>
 <div class="enter-row"><span class="go disabled" aria-label="سامانه همولوگیشن به زودی فعال می‌شود"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span></div>
+</article>
+<article class="app">
+<div class="app-top"><span class="state soon">به زودی</span></div>
+<div class="app-icon" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="8" y="8" width="48" height="48" rx="14" fill="#fff" stroke="#e7dcfb" stroke-width="2"/><path d="M17 37l3-8.5A5 5 0 0 1 24.7 25h14.5a5 5 0 0 1 4.7 3.4L47 37" fill="none" stroke="#6d28d9" stroke-width="2.8" stroke-linecap="round"/><path d="M19 37h26a4 4 0 0 1 4 4v3H15v-3a4 4 0 0 1 4-4z" fill="#f3edff" stroke="#dacaf6"/><circle cx="23" cy="44" r="2.7" fill="#6d28d9"/><circle cx="41" cy="44" r="2.7" fill="#6d28d9"/><path d="M38 13h12a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5h-5l-5 5v-5h-2a5 5 0 0 1-5-5V18a5 5 0 0 1 5-5z" fill="#8b5cf6"/><circle cx="41" cy="23" r="1.8" fill="#fff"/><circle cx="46" cy="23" r="1.8" fill="#fff"/><circle cx="51" cy="23" r="1.8" fill="#fff"/><path d="M22 15l1.5 3.2L27 20l-3.5 1.5L22 25l-1.5-3.5L17 20l3.5-1.8z" fill="#a78bfa"/><path d="M29 11l1 2.2 2.3 1-2.3 1-1 2.3-1-2.3-2.2-1 2.2-1z" fill="#6d28d9"/></svg></div>
+<h2 class="name">سامانه دستیار هوشمند راهنمای خودرو</h2>
+<div class="enter-row"><span class="go disabled" aria-label="سامانه دستیار هوشمند راهنمای خودرو به زودی فعال می‌شود"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span></div>
 </article>
 </section>
 <footer>توسعه یافته توسط واحد توسعه و تکوین محصول شرکت خودروسازان بم | شهاب‌الدین تنهائیان و نازنین قائمی</footer>
 </main>
-<button id="installApp" class="install-btn" type="button" hidden aria-label="نصب BAMCO"><svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span>نصب BAMCO</span></button>
 <script>
-let deferredInstallPrompt = null;
-const installBtn = document.getElementById('installApp');
-const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-
-if (!isStandalone) installBtn.hidden = false;
-
-window.addEventListener('beforeinstallprompt', event => {
-  event.preventDefault();
-  deferredInstallPrompt = event;
-  installBtn.hidden = false;
-});
-
-installBtn.addEventListener('click', async () => {
-  if (deferredInstallPrompt) {
-    deferredInstallPrompt.prompt();
-    await deferredInstallPrompt.userChoice;
-    deferredInstallPrompt = null;
-    return;
-  }
-  if (isIOS) {
-    alert('در Safari روی Share بزنید و سپس Add to Home Screen را انتخاب کنید. نام آیکون BAMCO خواهد بود.');
-  } else {
-    alert('اگر پنجره نصب خودکار باز نشد، در Chrome یا Edge از منوی مرورگر گزینه Install BAMCO یا نصب برنامه را انتخاب کنید.');
-  }
-});
-
-window.addEventListener('appinstalled', () => { installBtn.hidden = true; });
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js', {updateViaCache:'none'}).then(reg => reg.update()).catch(() => {});
-  });
-}
+let deferredInstallPrompt=null;
+const installBtn=document.getElementById('installApp');
+const isStandalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+if(!isStandalone)installBtn.hidden=false;
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;installBtn.hidden=false;});
+installBtn.addEventListener('click',async()=>{if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;return;}if(isIOS){alert('در Safari روی Share بزنید و سپس Add to Home Screen را انتخاب کنید.');}else{alert('اگر پنجره نصب باز نشد، از منوی Chrome یا Edge گزینه Install app یا نصب برنامه را انتخاب کنید.');}});
+window.addEventListener('appinstalled',()=>{installBtn.hidden=true;});
+if('serviceWorker'in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});});}
 </script>
 </body>
 </html>
