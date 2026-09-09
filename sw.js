@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bamco-app-center-v7';
+const CACHE_NAME = 'bamco-app-center-v8';
 const APP_SHELL = [
   '/BAMCO-APP-CENTER/',
   '/BAMCO-APP-CENTER/index.html',
